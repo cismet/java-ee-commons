@@ -36,8 +36,7 @@ public class EJBAccessor<T> {
 
     //ToDo reflect generic/method
     public void initEJBAccessor(Class<T> type) throws NamingException {
-        InitialContext ic = new InitialContext(initalContextProperties);
-        ic.
+        InitialContext ic = new InitialContext(initalContextProperties);        
         ejbInterface = (T) ic.lookup(type.getName());
     }
 
