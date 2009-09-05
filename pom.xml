@@ -1,25 +1,23 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>de.cismet.maven</groupId>
-        <artifactId>cismetParent</artifactId>
+        <groupId>de.cismet</groupId>
+        <artifactId>cismet-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>de.cismet.ee</groupId>
-    <artifactId>EJBAccess</artifactId>
-    <packaging>jar</packaging>
+
+    <groupId>de.cismet.commons</groupId>
+    <artifactId>java-ee-commons</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>EJBAccess</name>
-    <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
+
+    <name>Java EE Commons</name>
+    <description>!!! description pending !!!</description>
+
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>de.cismet.todo</groupId>
             <artifactId>javaee</artifactId>
@@ -47,7 +45,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.11</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
