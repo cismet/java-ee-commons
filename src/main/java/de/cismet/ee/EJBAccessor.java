@@ -1,29 +1,53 @@
+/***************************************************
+*
+* cismet GmbH, Saarbruecken, Germany
+*
+*              ... and it just works.
+*
+****************************************************/
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package de.cismet.ee;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Properties;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Field;
+
+import java.util.Arrays;
+import java.util.Properties;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 /**
+ * DOCUMENT ME!
  *
- * @author spuhl
+ * @author   spuhl
+ * @version  $Revision$, $Date$
  */
 //ToDo Testcases
 public class EJBAccessor<T> {
 
+    //~ Static fields/initializers ---------------------------------------------
+
     private static final String ORB_INITIAL_HOST = "org.omg.CORBA.ORBInitialHost";
     private static final String ORB_INITIAL_PORT = "org.omg.CORBA.ORBInitialPort";
-    private final static Logger log = org.apache.log4j.Logger.getLogger(EJBAccessor.class);
+    private static final Logger log = org.apache.log4j.Logger.getLogger(EJBAccessor.class);
+
+    //~ Instance fields --------------------------------------------------------
+
     private Properties initalContextProperties;
     private T ejbInterface;
 
+    //~ Constructors -----------------------------------------------------------
+
+    /**
+     * Creates a new EJBAccessor object.
+     *
+     * @param  initalContextProperties  DOCUMENT ME!
+     */
     public EJBAccessor(final Properties initalContextProperties) {
         log.info("EJBACCESSOR: server: " + initalContextProperties.getProperty(ORB_INITIAL_HOST));
         log.info("EJBACCESSOR: orbPort: " + initalContextProperties.getProperty(ORB_INITIAL_PORT));
@@ -34,13 +58,34 @@ public class EJBAccessor<T> {
         }
     }
 
-    //ToDo reflect generic/method
-    public void initEJBAccessor(Class<T> type) throws NamingException {
-        InitialContext ic = new InitialContext(initalContextProperties);        
-        ejbInterface = (T) ic.lookup(type.getName());
+    //~ Methods ----------------------------------------------------------------
+
+    /**
+     * ToDo reflect generic/method.
+     *
+     * @param   type  DOCUMENT ME!
+     *
+     * @throws  NamingException  DOCUMENT ME!
+     */
+    public void initEJBAccessor(final Class<T> type) throws NamingException {
+        final InitialContext ic = new InitialContext(initalContextProperties);
+        ejbInterface = (T)ic.lookup(type.getName());
     }
 
-    public static <E> EJBAccessor<E> createEJBAccessor(final String host, final String orbPort, Class<E> type) throws NamingException {
+    /**
+     * DOCUMENT ME!
+     *
+     * @param   <E>      DOCUMENT ME!
+     * @param   host     DOCUMENT ME!
+     * @param   orbPort  DOCUMENT ME!
+     * @param   type     DOCUMENT ME!
+     *
+     * @return  DOCUMENT ME!
+     *
+     * @throws  NamingException  DOCUMENT ME!
+     */
+    public static <E> EJBAccessor<E> createEJBAccessor(final String host, final String orbPort, final Class<E> type)
+            throws NamingException {
         final Properties props = new Properties();
         props.setProperty(ORB_INITIAL_HOST, host);
         props.setProperty(ORB_INITIAL_PORT, orbPort);
@@ -49,29 +94,32 @@ public class EJBAccessor<T> {
         return ejbAccess;
     }
 
-    //ToDo reflect generic/method
-//    public static <T> EJBAccessor<T> createEJBAccessor(final String host, final String orbPort) throws NamingException {
-//        final Properties props = new Properties();
-//        props.setProperty(ORB_INITIAL_HOST, host);
-//        props.setProperty(ORB_INITIAL_PORT, orbPort);
-//        final EJBAccessor<T> ejbAccess = new EJBAccessor<T>(props);
-//        ejbAccess.initEJBAccessor(T);
-//        return ejbAccess;
-//    }
-
-    public static <E> EJBAccessor<E> createEJBAccessor(Class<E> type) throws NamingException {
+    /**
+     * ToDo reflect generic/method public static <T> EJBAccessor<T> createEJBAccessor(final String host, final String
+     * orbPort) throws NamingException { final Properties props = new Properties(); props.setProperty(ORB_INITIAL_HOST,
+     * host); props.setProperty(ORB_INITIAL_PORT, orbPort); final EJBAccessor<T> ejbAccess = new EJBAccessor<T>(props);
+     * ejbAccess.initEJBAccessor(T); return ejbAccess; }.
+     *
+     * @param   <E>   DOCUMENT ME!
+     * @param   type  DOCUMENT ME!
+     *
+     * @return  DOCUMENT ME!
+     *
+     * @throws  NamingException  DOCUMENT ME!
+     */
+    public static <E> EJBAccessor<E> createEJBAccessor(final Class<E> type) throws NamingException {
         final EJBAccessor ejbAccessor = new EJBAccessor<E>(getDefaultProperties());
         ejbAccessor.initEJBAccessor(type);
         return ejbAccessor;
     }
 
-    //ToDo reflect generic/method
-//     public static <E> EJBAccessor<E> createEJBAccessor() throws NamingException {
-//        final EJBAccessor ejbAccessor = new EJBAccessor<E>(getDefaultProperties());
-//        ejbAccessor.initEJBAccessor();
-//        return ejbAccessor;
-//    }
-
+    /**
+     * ToDo reflect generic/method public static <E> EJBAccessor<E> createEJBAccessor() throws NamingException { final
+     * EJBAccessor ejbAccessor = new EJBAccessor<E>(getDefaultProperties()); ejbAccessor.initEJBAccessor(); return
+     * ejbAccessor; }.
+     *
+     * @return  DOCUMENT ME!
+     */
     public static Properties getDefaultProperties() {
         final Properties props = new Properties();
         props.setProperty(ORB_INITIAL_HOST, "localhost");
@@ -79,28 +127,43 @@ public class EJBAccessor<T> {
         return props;
     }
 
+    /**
+     * DOCUMENT ME!
+     *
+     * @return  DOCUMENT ME!
+     */
     public Properties getInitalContextProperties() {
         return initalContextProperties;
     }
 
-    public void setInitalContextProperties(Properties initalContextProperties) {
+    /**
+     * DOCUMENT ME!
+     *
+     * @param  initalContextProperties  DOCUMENT ME!
+     */
+    public void setInitalContextProperties(final Properties initalContextProperties) {
         this.initalContextProperties = initalContextProperties;
     }
 
+    /**
+     * DOCUMENT ME!
+     *
+     * @return  DOCUMENT ME!
+     */
     public T getEjbInterface() {
         return ejbInterface;
     }
 
-    //ToDo reflect generic/method
-//    private String getEJBInterfaceClassName() {
-//        try {
-//            Field ejbInterfaceField = getClass().getDeclaredField("ejbInterface");
-//            ejbInterfaceField.setAccessible(true);
-//            System.out.println("type: " + getClass().getDeclaredField("ejbInterface").getType());
-//            System.out.println("type name: " + getClass().getDeclaredField("ejbInterface").getType().getName());
-//            return getClass().getField("ejbInterface").getType().getName();
-//        } catch (NoSuchFieldException ex) {
-//            return null;
-//        }
-//    }
+    // ToDo reflect generic/method
+// private String getEJBInterfaceClassName() {
+// try {
+// Field ejbInterfaceField = getClass().getDeclaredField("ejbInterface");
+// ejbInterfaceField.setAccessible(true);
+// System.out.println("type: " + getClass().getDeclaredField("ejbInterface").getType());
+// System.out.println("type name: " + getClass().getDeclaredField("ejbInterface").getType().getName());
+// return getClass().getField("ejbInterface").getType().getName();
+// } catch (NoSuchFieldException ex) {
+// return null;
+// }
+// }
 }
