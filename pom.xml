@@ -46,12 +46,17 @@
             <version>unknown</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
+        <!--
+            Duplicate classes found in:
+              de.cismet.todo:appserv-rt:jar:unknown:runtime
+              de.cismet.todo:appserv-ext:jar:unknown:runtime
+        -->
+        <!--<dependency>
             <groupId>de.cismet.todo</groupId>
             <artifactId>appserv-rt</artifactId>
             <version>unknown</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>de.cismet.todo</groupId>
             <artifactId>appserv-ext</artifactId>
