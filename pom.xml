@@ -6,8 +6,8 @@
         FIXME: Replace deprecated cids-parent by cismet-parent
     -->
     <parent>
-        <groupId>de.cismet.cids</groupId>
-        <artifactId>cids-parent</artifactId>
+        <groupId>de.cismet</groupId>
+        <artifactId>cismet-parent</artifactId>
         <version>5.1</version>
     </parent>
 
@@ -39,6 +39,19 @@
     <!-- 
         TODO define versions in dependency management section of ext-libs-bom 
     -->  
+    <dependencyManagement>  
+        <dependencies>
+            <!-- IMPORT of cismet-ext-bom -->
+            <dependency>
+                <groupId>de.cismet</groupId>
+                <artifactId>cismet-ext-bom</artifactId>
+                <version>5.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
     <dependencies>
         <dependency>
             <groupId>de.cismet.todo</groupId>
@@ -72,17 +85,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
         </dependency>
-    </dependencies>
-    
-    <build>
-        <!-- 
-            FIXME: DANGER DANGER DANGER !!!
-            the artifact has to be renamed due to compatibility reasons to the 
-            legacy cidsDistribution
-            See https://cismet.slack.com/messages/ugly-winning/files/F3ZC7HX7V/
-        -->
-        <finalName>java-ee-commons-1.0-SNAPSHOT</finalName>
-    </build>
+    </dependencies> 
 </project>
